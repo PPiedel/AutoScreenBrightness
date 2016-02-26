@@ -6,7 +6,7 @@
 
     <groupId>pl.yahoo.pawelpiedel</groupId>
     <artifactId>ScreenBrightness</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -21,8 +21,14 @@
             <version>0.3.10</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.4</version>
+        </dependency>
 
+
+    </dependencies>
 
 
 </project>

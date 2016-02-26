@@ -7,42 +7,30 @@ import java.io.File;
 import java.io.IOException;
 
 public class WebCamManager {
-    Webcam webcam;
 
-    WebCamManager(){
-        webcam = Webcam.getDefault();
-    }
+    public static void takeAPicture(){
 
-    public boolean takeAPicture(){
-        if(isWebCamDetected()){
-            webcam = Webcam.getDefault();
-            setViewSize();
+            Webcam webcam = Webcam.getDefault();
+            webcam.setViewSize(getViewSize(webcam));
             webcam.open();
 
             BufferedImage image = webcam.getImage();
             saveImage(image);
 
-            return true;
-
-        }
-        else {
-            return false;
-        }
-
-
     }
 
-    private void setViewSize() {
-        webcam.setViewSize(webcam.getViewSize());
+    public static Dimension getViewSize(Webcam webcam) {
+        return webcam.getViewSize();
     }
 
-    private boolean isWebCamDetected(){
+    public static boolean isWebCamDetected(){
+        Webcam webcam = Webcam.getDefault();
         return webcam==null;
     }
 
-    private void saveImage(BufferedImage image) {
+    private static void saveImage(BufferedImage image) {
         try {
-            ImageIO.write(image, "PNG", new File("test.png"));
+            ImageIO.write(image, "JPG", new File("test.jpg"));
         }catch (IOException e){
             e.printStackTrace();
         }
