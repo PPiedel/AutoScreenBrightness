@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
  * Created by Pawel on 2016-02-26.
  */
 public class BrightnessManager {
-    public static void setBrightness(int brightness, int delay) throws IOException{
+
+    public void setBrightness(int brightness, int delay) throws IOException{
         String command = createExecCommand(brightness, delay);
 
         Process powerShellProcess = Runtime.getRuntime().exec(command);
@@ -30,12 +31,20 @@ public class BrightnessManager {
 
     }
 
-    private static String createExecCommand(int brightness, int delay) {
+    private String createExecCommand(int brightness, int delay) {
         String power_shell_exe_command = "powershell.exe  ";
         String brightness_settings_command = String.format("$brightness = %d; $delay = %d;", brightness, delay) +
                                                             "$myMonitor = Get-WmiObject -Namespace root\\wmi -Class WmiMonitorBrightnessMethods;"+
                                                             "$myMonitor.wmisetbrightness($delay, $brightness);" ;
 
         return power_shell_exe_command + brightness_settings_command;
+    }
+
+    public int calculateBrightness(byte[] pixels){
+        int sum = 0;
+        for (byte pixel : pixels){
+            sum+=pixel;
+        }
+        return sum/pixels.length;
     }
 }

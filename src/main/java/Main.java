@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Main {
     public static void main(String[] args) {
         /*try {
@@ -8,7 +6,14 @@ public class Main {
             e.printStackTrace();
         }*/
 
-        WebCamManager.takeAPicture();
+        WebCamManager webCamManager = new WebCamManager();
+        byte[] pixels = webCamManager.getCameraImageBitmap();
+
+        BrightnessManager brightnessManager = new BrightnessManager();
+        int brightness =  brightnessManager.calculateBrightness(pixels);
+
+        System.out.println("Calculated brightness : "+brightness);
+
 
     }
 }
