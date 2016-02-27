@@ -1,18 +1,32 @@
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
-        /*try {
-            BrightnessManager.setBrightness(50, 5);
-        }catch (IOException e){
-            e.printStackTrace();
-        }*/
-
         WebCamManager webCamManager = new WebCamManager();
-        byte[] pixels = webCamManager.getCameraImageBitmap();
-
         BrightnessManager brightnessManager = new BrightnessManager();
-        int brightness =  brightnessManager.calculateBrightness(pixels);
+        BufferedImage image;
 
-        System.out.println("Calculated brightness : "+brightness);
+        boolean running = true;
+        while (running){
+            int i=0;
+            image = webCamManager.getCameraImage();
+            int calculatedBrightness =  brightnessManager.calculateLuminance(image);
+            System.out.println("Calculated brightness " + i + " :  "+calculatedBrightness);
+            try {
+                brightnessManager.setBrightness(calculatedBrightness, 0);
+                Thread.sleep(2000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+
 
 
     }

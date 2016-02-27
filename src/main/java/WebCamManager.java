@@ -1,5 +1,4 @@
 import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
 
 import javax.imageio.ImageIO;
@@ -16,32 +15,31 @@ public class WebCamManager {
 
     WebCamManager(){
         webcam = Webcam.getDefault();
+        setCameraResolution();
     }
 
-    public byte[] getCameraImageBitmap() {
-        setCameraResolution();
+    public BufferedImage getCameraImage() {
         webcam.open();
-
         BufferedImage image = webcam.getImage();
         webcam.close();
 
-        saveImageOnDisk(image);
+        //saveImageOnDisk(image);
 
-        return getBitmapFromImage(image);
+        return image;
     }
 
     private void setCameraResolution() {
-        Dimension[] nonStandardResolutions = new Dimension[] {
+        /*Dimension[] nonStandardResolutions = new Dimension[] {
                 WebcamResolution.PAL.getSize(),
                 WebcamResolution.HD720.getSize(),
                 new Dimension(2000, 1000),
                 new Dimension(1000, 500),
         };
-        webcam.setCustomViewSizes(nonStandardResolutions);
-        webcam.setViewSize(WebcamResolution.HD720.getSize());
+        webcam.setCustomViewSizes(nonStandardResolutions);*/
+        webcam.setViewSize(webcam.getViewSize());
     }
 
-    private Dimension getViewSize(Webcam webcam) {
+    private Dimension getCameraResolution(Webcam webcam) {
         return webcam.getViewSize();
     }
 
@@ -57,15 +55,20 @@ public class WebCamManager {
         }
     }
 
-    private byte[] getBitmapFromImage(BufferedImage image) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private byte[] getImageInByteArray(BufferedImage image) {
+        byte[] imageInByte = null;
+
         try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ImageIO.write(image, IMAGE_FILE_FORMAT, outputStream);
+            outputStream.flush();
+            imageInByte = outputStream.toByteArray();
+            outputStream.close();
         }catch (IOException e){
             e.printStackTrace();
         }
-
-        return outputStream.toByteArray();
+        System.out.println("Image in byte length : "+imageInByte.length);
+        return imageInByte;
     }
 
 

@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,11 +41,23 @@ public class BrightnessManager {
         return power_shell_exe_command + brightness_settings_command;
     }
 
-    public int calculateBrightness(byte[] pixels){
-        int sum = 0;
-        for (byte pixel : pixels){
-            sum+=pixel;
+    public int calculateLuminance(BufferedImage image){
+        float sumOfBrightness = 0;
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                int  pixel   = image.getRGB(x,y);
+                //int alpha = (pixel >> 24) & 0xff;
+                float red = (pixel >> 16) & 0xff;
+                float green = (pixel >> 8) & 0xff;
+                float blue = (pixel) & 0xff;
+
+                sumOfBrightness+= (red / 255.0)* 0.3 + (green / 255.0) * 0.59 + (blue / 255.0) * 0.11;
+            }
         }
-        return sum/pixels.length;
+        System.out.println("Sum : "+sumOfBrightness);
+        float luminance = sumOfBrightness/(image.getHeight()*image.getWidth());
+        System.out.println("Luminance "+luminance);
+        return (int) (luminance*100) ;
     }
+
 }
