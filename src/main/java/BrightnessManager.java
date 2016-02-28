@@ -51,12 +51,12 @@ public class BrightnessManager {
                 float green = (pixel >> 8) & 0xff;
                 float blue = (pixel) & 0xff;
 
-                sumOfBrightness+= (red / 255.0)* 0.3 + (green / 255.0) * 0.59 + (blue / 255.0) * 0.11;
+                sumOfBrightness+= Math.sqrt(red*red*0.299 + green*green*0.587 + blue*blue*0.114);
             }
         }
-        System.out.println("Sum : "+sumOfBrightness);
+        //System.out.println("Sum : "+sumOfBrightness);
         float luminance = sumOfBrightness/(image.getHeight()*image.getWidth());
-        System.out.println("Luminance "+luminance);
+        //System.out.println("Luminance "+luminance);
         return (int) (luminance*100) ;
     }
 
