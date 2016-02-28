@@ -11,7 +11,7 @@ import java.io.IOException;
 public class WebCamManager {
     private final String IMAGE_FILE_FORMAT = "bmp";
 
-    Webcam webcam;
+    private Webcam webcam;
 
     WebCamManager(){
         webcam = Webcam.getDefault();
@@ -19,13 +19,14 @@ public class WebCamManager {
     }
 
     private void setCameraResolution() {
-        Dimension[] nonStandardResolutions = new Dimension[] {
+       Dimension[] nonStandardResolutions = new Dimension[] {
                 WebcamResolution.PAL.getSize(),
                 WebcamResolution.HD720.getSize(),
                 new Dimension(2000, 1000),
                 new Dimension(1000, 500),
         };
         webcam.setCustomViewSizes(nonStandardResolutions);
+        webcam.setViewSize(WebcamResolution.HD720.getSize());
 
         /*Set default web cam resolution*/
        // webcam.setViewSize(webcam.getViewSize());
