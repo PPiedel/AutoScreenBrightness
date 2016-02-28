@@ -51,12 +51,13 @@ public class BrightnessManager {
                 float green = (pixel >> 8) & 0xff;
                 float blue = (pixel) & 0xff;
 
-                sumOfBrightness+= Math.sqrt(red*red*0.299 + green*green*0.587 + blue*blue*0.114);
+                //sumOfBrightness+= Math.sqrt(red*red*0.299 + green*green*0.587 + blue*blue*0.114);
+                sumOfBrightness+= (red*299 + green*587 + blue*114)/1000;    //W3C algo
             }
         }
         //System.out.println("Sum : "+sumOfBrightness);
-        float percentBrightness = (sumOfBrightness/(image.getHeight()*image.getWidth()))*100;
-        //System.out.println("Luminance "+luminance);
+        float percentBrightness = (sumOfBrightness/(image.getHeight()*image.getWidth()));
+        System.out.println("Luminance "+percentBrightness);
         return (int) percentBrightness ;
     }
 

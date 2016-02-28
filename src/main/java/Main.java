@@ -8,11 +8,12 @@ public class Main {
         BufferedImage image;
 
         boolean running = true;
+        int i=0;
         while (running){
-            int i=0;
             image = webCamManager.getCameraImage();
             int calculatedBrightness =  brightnessManager.calculateLuminance(image);
             System.out.println("Calculated brightness " + i + " :  "+calculatedBrightness);
+            i++;
             try {
                 brightnessManager.setBrightness(calculatedBrightness, 0);
                 Thread.sleep(2000);
