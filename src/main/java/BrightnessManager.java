@@ -16,6 +16,7 @@ public class BrightnessManager {
         powerShellProcess.getOutputStream().close();
 
         //Report any error messages
+        // Where we should put this (error messages) ??? Because for sure not here.
         String line;
 
         BufferedReader stderr = new BufferedReader(new InputStreamReader(

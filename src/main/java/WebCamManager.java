@@ -1,4 +1,5 @@
 import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamResolution;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,16 +19,16 @@ public class WebCamManager {
     }
 
     private void setCameraResolution() {
-        /*Dimension[] nonStandardResolutions = new Dimension[] {
+        Dimension[] nonStandardResolutions = new Dimension[] {
                 WebcamResolution.PAL.getSize(),
                 WebcamResolution.HD720.getSize(),
                 new Dimension(2000, 1000),
                 new Dimension(1000, 500),
         };
-        webcam.setCustomViewSizes(nonStandardResolutions);*/
+        webcam.setCustomViewSizes(nonStandardResolutions);
 
         /*Set default web cam resolution*/
-        webcam.setViewSize(webcam.getViewSize());
+       // webcam.setViewSize(webcam.getViewSize());
     }
 
     public BufferedImage getCameraImage() {
