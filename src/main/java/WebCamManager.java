@@ -25,6 +25,8 @@ public class WebCamManager {
                 new Dimension(1000, 500),
         };
         webcam.setCustomViewSizes(nonStandardResolutions);*/
+
+        /*Set default web cam resolution*/
         webcam.setViewSize(webcam.getViewSize());
     }
 

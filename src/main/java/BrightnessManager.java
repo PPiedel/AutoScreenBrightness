@@ -55,9 +55,9 @@ public class BrightnessManager {
             }
         }
         //System.out.println("Sum : "+sumOfBrightness);
-        float luminance = sumOfBrightness/(image.getHeight()*image.getWidth());
+        float percentBrightness = (sumOfBrightness/(image.getHeight()*image.getWidth()))*100;
         //System.out.println("Luminance "+luminance);
-        return (int) (luminance*100) ;
+        return (int) percentBrightness ;
     }
 
 }
