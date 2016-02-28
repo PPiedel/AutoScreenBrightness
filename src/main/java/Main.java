@@ -1,4 +1,6 @@
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -11,6 +13,14 @@ public class Main {
         int i=0;
         while (running){
             image = webCamManager.getCameraImage();
+
+            /*File outputfile = new File("saved.png");
+            try {
+                ImageIO.write(image, "png", outputfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+
             int calculatedBrightness =  brightnessManager.calculateLuminance(image);
             System.out.println("Calculated brightness " + i + " :  "+calculatedBrightness);
             i++;
