@@ -1,35 +1,24 @@
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created by Pawel on 2016-02-26.
  */
 public class BrightnessManager {
 
-    public void setBrightness(int brightness, int delay) throws IOException{
+    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
         String command = createExecCommand(brightness, delay);
-
         Process powerShellProcess = Runtime.getRuntime().exec(command);
-
         powerShellProcess.getOutputStream().close();
 
-        //Report any error messages
-        // Where we should put this (error messages) ??? Because for sure not here.
-        String line;
 
-        BufferedReader stderr = new BufferedReader(new InputStreamReader(
-                powerShellProcess.getErrorStream()));
-        line = stderr.readLine();
-        if (line != null) {
-            System.err.println("Standard Error:");
-            do {
-                System.err.println(line);
-            } while ((line = stderr.readLine()) != null);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
+        String errorStream = bufferedReader.readLine();
+        if (errorStream != null) {
+           throw new BrightnessSettingException(errorStream);
 
         }
-        stderr.close();
+        bufferedReader.close();
 
     }
 

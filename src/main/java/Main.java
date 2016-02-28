@@ -27,7 +27,11 @@ public class Main {
             try {
                 brightnessManager.setBrightness(calculatedBrightness, 0);
                 Thread.sleep(2000);
-            }catch (InterruptedException e){
+            }catch (BrightnessSettingException e){
+                System.err.println("Standard Error:");
+                System.err.println(e.getMessage());
+            }
+            catch (InterruptedException e){
                 e.printStackTrace();
             }catch (IOException e){
                 e.printStackTrace();
