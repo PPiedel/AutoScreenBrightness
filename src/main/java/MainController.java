@@ -8,7 +8,7 @@ import java.io.IOException;
 public class MainController {
     private static final int BREAK_TIME = 2000;
     private static final int DELAY_TIME = 0;
-    boolean running = false;
+    private boolean running = false;
 
     public boolean isRunning() {
         return running;
@@ -16,6 +16,7 @@ public class MainController {
 
     public void setRunning(boolean running) {
         this.running = running;
+        startWorking();
     }
 
     private MainFrame mainFrame;
