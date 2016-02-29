@@ -8,6 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Created by Pawel on 2016-02-26.
+ */
 public class WebCamManager {
     private final String IMAGE_FILE_FORMAT = "bmp";
 
