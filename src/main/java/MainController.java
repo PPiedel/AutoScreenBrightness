@@ -1,5 +1,3 @@
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,9 +8,17 @@ import java.io.IOException;
 public class MainController {
     private static final int BREAK_TIME = 2000;
     private static final int DELAY_TIME = 0;
+    boolean running = false;
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
 
     private MainFrame mainFrame;
-
 
 
     public void startWorking() {
@@ -20,7 +26,7 @@ public class MainController {
         BrightnessManager brightnessManager = new BrightnessManager();
         BufferedImage image;
 
-        boolean running =  true;
+
         while (running) {
             image = webCamManager.getCameraImage();
             int calculatedBrightness = brightnessManager.calculateLuminance(image);
@@ -28,22 +34,21 @@ public class MainController {
             try {
                 brightnessManager.setBrightness(calculatedBrightness, DELAY_TIME);
                 Thread.sleep(BREAK_TIME);
-            }catch (BrightnessSettingException e){
+            } catch (BrightnessSettingException e) {
                 e.printStackTrace();
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();}
-            catch (IOException e) {
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void stopWorking(){
+    public void stopWorking() {
 
     }
 
-    public void startGui(){
+    public void startGui() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 mainFrame = new MainFrame();

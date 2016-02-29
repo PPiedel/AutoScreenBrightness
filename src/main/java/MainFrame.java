@@ -12,9 +12,7 @@ public class MainFrame {
     private JPanel mainPanel;
     private JLabel actualBrightnessDesc;
 
-    public MainFrame() {}
-
-    private void createUIComponents() {
+    public MainFrame() {
     }
 
     public void start() {
