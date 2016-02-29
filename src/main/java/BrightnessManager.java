@@ -11,7 +11,19 @@ public class BrightnessManager {
         Process powerShellProcess = Runtime.getRuntime().exec(command);
         powerShellProcess.getOutputStream().close();
 
+        reportAnyErrors(powerShellProcess);
+    }
 
+    private String createExecCommand(int brightness, int delay) {
+        String power_shell_exe_command = "powershell.exe  ";
+        String brightness_settings_command = String.format("$brightness = %d; $delay = %d;", brightness, delay) +
+                "$myMonitor = Get-WmiObject -Namespace root\\wmi -Class WmiMonitorBrightnessMethods;"+
+                "$myMonitor.wmisetbrightness($delay, $brightness);" ;
+
+        return power_shell_exe_command + brightness_settings_command;
+    }
+
+    private void reportAnyErrors(Process powerShellProcess) throws IOException, BrightnessSettingException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
         String errorStream = bufferedReader.readLine();
         if (errorStream != null) {
@@ -19,16 +31,6 @@ public class BrightnessManager {
 
         }
         bufferedReader.close();
-
-    }
-
-    private String createExecCommand(int brightness, int delay) {
-        String power_shell_exe_command = "powershell.exe  ";
-        String brightness_settings_command = String.format("$brightness = %d; $delay = %d;", brightness, delay) +
-                                                            "$myMonitor = Get-WmiObject -Namespace root\\wmi -Class WmiMonitorBrightnessMethods;"+
-                                                            "$myMonitor.wmisetbrightness($delay, $brightness);" ;
-
-        return power_shell_exe_command + brightness_settings_command;
     }
 
     public int calculateLuminance(BufferedImage image){
@@ -36,7 +38,6 @@ public class BrightnessManager {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 int  pixel   = image.getRGB(x,y);
-                //int alpha = (pixel >> 24) & 0xff;
                 float red = (pixel >> 16) & 0xff;
                 float green = (pixel >> 8) & 0xff;
                 float blue = (pixel) & 0xff;

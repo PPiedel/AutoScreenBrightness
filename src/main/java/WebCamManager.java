@@ -58,7 +58,7 @@ public class WebCamManager {
         }
     }
 
-    private byte[] getImageInByteArray(BufferedImage image) {
+    public byte[] getImageInByteArray(BufferedImage image) {
         byte[] imageInByte = null;
 
         try {

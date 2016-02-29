@@ -9,7 +9,6 @@ public class MainController {
     private MainFrame mainFrame;
 
     public void startWorking() {
-
         WebCamManager webCamManager = new WebCamManager();
         BrightnessManager brightnessManager = new BrightnessManager();
         BufferedImage image;
