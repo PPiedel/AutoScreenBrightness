@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -5,7 +6,7 @@ import java.io.IOException;
  * Created by Kamil on 2016-02-28.
  */
 public class MainController {
-    private static MainFrame mainFrame;
+    private MainFrame mainFrame;
 
     public void startWorking() {
 
@@ -15,35 +16,34 @@ public class MainController {
 
         boolean running = true;
         int i = 0;
-        while (running)
-
-        {
+        while (running) {
             image = webCamManager.getCameraImage();
-
-            /*File outputfile = new File("saved.png");
-            try {
-                ImageIO.write(image, "png", outputfile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
             int calculatedBrightness = brightnessManager.calculateLuminance(image);
-            System.out.println("Calculated brightness " + i + " :  " + calculatedBrightness);
-            mainFrame.setBrightnessLabel(new Integer(calculatedBrightness).toString());
+            //System.out.println("Calculated brightness " + i + " :  " + calculatedBrightness);
+            mainFrame.setBrightnessLabel(Integer.toString(calculatedBrightness));
             i++;
             try {
                 brightnessManager.setBrightness(calculatedBrightness, 0);
                 Thread.sleep(2000);
-            } catch (InterruptedException e) {
+            }catch (BrightnessSettingException e){
                 e.printStackTrace();
-            } catch (IOException e) {
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();}
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
     public void startGui(){
-        mainFrame = new MainFrame();
-        mainFrame.start();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame = new MainFrame();
+                mainFrame.start();
+            }
+        });
+
     }
 }
 

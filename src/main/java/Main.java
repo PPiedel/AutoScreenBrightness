@@ -1,8 +1,8 @@
-
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        MainController mainController = new MainController();
+        final MainController mainController = new MainController();
         mainController.startGui();
         mainController.startWorking();
     }

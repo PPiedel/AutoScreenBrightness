@@ -11,22 +11,25 @@ public class MainFrame {
     private JLabel actualBrightnessDesc;
 
     public MainFrame() {
+
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 
     public void start() {
         JFrame frame = new JFrame("MainFrame");
+        actualBrightnessLabel = new JLabel();
+        actualBrightnessDesc = new JLabel();
         frame.setContentPane(new MainFrame().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 
-    public void setBrightnessLabel (String label){
-        actualBrightnessLabel.setText(label);
+    public void setBrightnessLabel(String value) {
+        actualBrightnessLabel.setText("Cokolwiek innego");
     }
 
 }
