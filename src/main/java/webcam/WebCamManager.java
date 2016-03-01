@@ -1,3 +1,5 @@
+package webcam;
+
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
 import util.Utilities;
@@ -13,6 +15,9 @@ import java.io.IOException;
  * Created by Pawel on 2016-02-26.
  */
 public class WebCamManager {
+    //Outer class
+    private int breakTime = 2000;
+    private int delayTime = 0;
     private final String IMAGE_FILE_FORMAT = "bmp";
 
     private Webcam webcam;
@@ -20,6 +25,18 @@ public class WebCamManager {
     WebCamManager(){
         webcam = Webcam.getDefault();
         setCameraResolution();
+    }
+
+    public int getBreakTime() {
+        return breakTime;
+    }
+
+    public void setBreakTime(int breakTime) {
+        this.breakTime = breakTime;
+    }
+
+    public int getDelayTime() {
+        return delayTime;
     }
 
     private void setCameraResolution() {

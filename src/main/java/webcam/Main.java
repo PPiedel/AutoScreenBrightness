@@ -1,4 +1,7 @@
+package webcam;
+
 import org.apache.commons.lang3.SystemUtils;
+import webcam.MainController;
 
 import javax.swing.*;
 public class Main {

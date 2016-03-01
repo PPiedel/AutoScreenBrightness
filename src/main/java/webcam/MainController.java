@@ -1,6 +1,4 @@
-import webcam.BrightnessManager;
-import webcam.BrightnessSettingException;
-import webcam.WindowsBrightnessManager;
+package webcam;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -10,9 +8,6 @@ import java.io.IOException;
  * Created by Kamil on 2016-02-28.
  */
 public class MainController {
-    //Outer class
-    private static final int BREAK_TIME = 2000;
-    private static final int DELAY_TIME = 0;
     private InnerController innerController;
     private MainFrame mainFrame;
     private BrightnessManager brightnessManager;
@@ -25,11 +20,13 @@ public class MainController {
 
     //Inner class
     public class InnerController implements Runnable{
+        private boolean running = false;
+
         InnerController(){
             webCamManager = new WebCamManager();
             brightnessManager = new WindowsBrightnessManager();
         }
-        private boolean running = false;
+
         public void run() {
             running=true;
             while (running) {
@@ -37,8 +34,8 @@ public class MainController {
                 int calculatedBrightness = brightnessManager.calculateLuminance(image);
                 mainFrame.setBrightnessLabel(Integer.toString(calculatedBrightness));
                 try {
-                    brightnessManager.setBrightness(calculatedBrightness, DELAY_TIME);
-                    Thread.sleep(BREAK_TIME);
+                    brightnessManager.setBrightness(calculatedBrightness, webCamManager.getDelayTime());
+                    Thread.sleep(webCamManager.getBreakTime());
                 } catch (BrightnessSettingException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -48,12 +45,15 @@ public class MainController {
                 }
             }
         }
+
         public void stopWorking() {
             running = false;
         }
+
         public boolean isRunning(){
             return running;
         }
+
         public void setBrightnessFactor(int val){
             double factor = (2.55*2)*((double)val/100); //50% slider is neutral
             brightnessManager.setBrightnessFactor(5.1-factor);

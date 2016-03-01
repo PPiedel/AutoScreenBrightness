@@ -1,4 +1,5 @@
 import org.junit.Test;
+import webcam.OSValidator;
 
 import static org.junit.Assert.*;
 

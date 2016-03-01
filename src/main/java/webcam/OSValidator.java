@@ -1,3 +1,5 @@
+package webcam;
+
 /**
  * Created by Pawel on 2016-03-01.
  */
