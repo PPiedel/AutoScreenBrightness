@@ -3,7 +3,7 @@
  */
 
 /*Based on the http://www.mkyong.com/java/how-to-detect-os-in-java-systemgetpropertyosname/*/
-    
+
 public class OSValidator {
     private static String OS = System.getProperty("os.name").toLowerCase();
 
