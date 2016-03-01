@@ -11,8 +11,10 @@ public class MainFrame {
     private JLabel actualBrightnessLabel;
     private JPanel mainPanel;
     private JLabel actualBrightnessDesc;
+    private MainController.InnerController innerController;
 
-    public MainFrame() {
+    public MainFrame(MainController.InnerController innerController) {
+        this.innerController = innerController;
     }
 
     public void start() {
@@ -24,12 +26,13 @@ public class MainFrame {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                innerController.startWorking();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                innerController.stopWorking();
             }
         });
 

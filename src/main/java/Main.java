@@ -5,7 +5,6 @@ public class Main {
         if(SystemUtils.IS_OS_WINDOWS) {
             MainController mainController = new MainController();
             mainController.startGui();
-            mainController.startWorking();
         }
     }
 }
