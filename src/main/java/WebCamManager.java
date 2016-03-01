@@ -40,8 +40,6 @@ public class WebCamManager {
         BufferedImage image = webcam.getImage();
         webcam.close();
 
-        //saveImageOnDisk(image);
-
         return image;
     }
 

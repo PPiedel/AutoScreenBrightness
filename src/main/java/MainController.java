@@ -23,7 +23,8 @@ public class MainController {
     public class InnerController implements Runnable{
         InnerController(){
             webCamManager = new WebCamManager();
-            brightnessManager = new BrightnessManager();}
+            brightnessManager = new BrightnessManager();
+        }
         private boolean running = false;
         public void run() {
             running=true;

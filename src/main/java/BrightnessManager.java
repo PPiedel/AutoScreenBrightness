@@ -6,35 +6,12 @@ import java.io.InputStreamReader;
 /**
  * Created by Pawel on 2016-02-26.
  */
-public class BrightnessManager {
+public abstract class BrightnessManager {
     private double brightnessFactor = 2.55;
 
-    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
-        String command = createExecCommand(brightness, delay);
-        Process powerShellProcess = Runtime.getRuntime().exec(command);
-        powerShellProcess.getOutputStream().close();
+    public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException ;
 
-        reportAnyErrors(powerShellProcess);
-    }
-
-    private String createExecCommand(int brightness, int delay) {
-        String power_shell_exe_command = "powershell.exe  ";
-        String brightness_settings_command = String.format("$brightness = %d; $delay = %d;", brightness, delay) +
-                "$myMonitor = Get-WmiObject -Namespace root\\wmi -Class WmiMonitorBrightnessMethods;" +
-                "$myMonitor.wmisetbrightness($delay, $brightness);";
-
-        return power_shell_exe_command + brightness_settings_command;
-    }
-
-    private void reportAnyErrors(Process powerShellProcess) throws IOException, BrightnessSettingException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
-        String errorStream = bufferedReader.readLine();
-        if (errorStream != null) {
-            throw new BrightnessSettingException(errorStream);
-
-        }
-        bufferedReader.close();
-    }
+    public abstract String createExecCommand(int brightness, int delay) ;
 
     public int calculateLuminance(BufferedImage image) {
         float sumOfBrightness = 0;
