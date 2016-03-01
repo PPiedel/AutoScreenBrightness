@@ -51,8 +51,8 @@ public class BrightnessManager {
         }
         //System.out.println("Sum : "+sumOfBrightness);
         float percentBrightness = (float) ((sumOfBrightness / brightnessFactor) / (image.getHeight() * image.getWidth()));
-        System.out.println("Luminance " + percentBrightness);
-        return (int) percentBrightness;
+        if(percentBrightness >= 100) return 100;
+        else return (int) percentBrightness;
     }
 
     public void setBrightnessFactor(double brightnessFactor) {

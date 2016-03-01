@@ -49,6 +49,10 @@ public class MainController {
         public boolean isRunning(){
             return running;
         }
+        public void setBrightnessFactor(int val){
+            double factor = (2.55*2)*((double)val/100); //50% slider is neutral
+            brightnessManager.setBrightnessFactor(5.1-factor);
+        }
     }
 
     //Outer controller
