@@ -8,7 +8,17 @@ import java.io.IOException;
 public class MainController {
     private static final int BREAK_TIME = 2000;
     private static final int DELAY_TIME = 0;
+
+    private WebCamManager webCamManager;
+    private BrightnessManager brightnessManager;
     private boolean running = false;
+    private BufferedImage image;
+    private MainFrame mainFrame;
+
+    MainController(){
+        webCamManager = new WebCamManager();
+        brightnessManager = new BrightnessManager();
+    }
 
     public boolean isRunning() {
         return running;
@@ -16,18 +26,12 @@ public class MainController {
 
     public void setRunning(boolean running) {
         this.running = running;
-        startWorking();
+        if (running){
+            startWorking();
+        }
     }
 
-    private MainFrame mainFrame;
-
-
     public void startWorking() {
-        WebCamManager webCamManager = new WebCamManager();
-        BrightnessManager brightnessManager = new BrightnessManager();
-        BufferedImage image;
-
-
         while (running) {
             image = webCamManager.getCameraImage();
             int calculatedBrightness = brightnessManager.calculateLuminance(image);
@@ -43,10 +47,6 @@ public class MainController {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void stopWorking() {
-
     }
 
     public void startGui() {
