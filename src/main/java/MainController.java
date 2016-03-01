@@ -15,18 +15,20 @@ public class MainController {
         return running;
     }
     private MainFrame mainFrame;
+    private BrightnessManager brightnessManager;
+    private BufferedImage image;
+    private WebCamManager webCamManager;
 
     MainController(){
         innerController = new InnerController();
     }
 
     //Inner class
-    public class InnerController extends Thread{
+    public class InnerController implements Runnable{
         public void run() {
             running = true;
-            WebCamManager webCamManager = new WebCamManager();
-            BrightnessManager brightnessManager = new BrightnessManager();
-            BufferedImage image;
+            webCamManager = new WebCamManager();
+            brightnessManager = new BrightnessManager();
             while (running) {
                 image = webCamManager.getCameraImage();
                 int calculatedBrightness = brightnessManager.calculateLuminance(image);
@@ -49,7 +51,7 @@ public class MainController {
         }
     }
 
-
+    //Outer controller
     public void startGui() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

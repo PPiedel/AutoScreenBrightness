@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Pawel on 2016-02-28.
@@ -11,7 +13,9 @@ public class MainFrame {
     private JLabel actualBrightnessLabel;
     private JPanel mainPanel;
     private JLabel actualBrightnessDesc;
+    private JSlider factorSlider;
     private MainController.InnerController innerController;
+    private final ExecutorService exService = Executors.newSingleThreadExecutor();
 
     public MainFrame(MainController.InnerController innerController) {
         this.innerController = innerController;
@@ -26,7 +30,7 @@ public class MainFrame {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                innerController.start();
+                exService.submit(innerController);
             }
         });
 
