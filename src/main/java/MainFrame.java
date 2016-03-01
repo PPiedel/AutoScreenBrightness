@@ -26,7 +26,7 @@ public class MainFrame {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                innerController.startWorking();
+                innerController.start();
             }
         });
 

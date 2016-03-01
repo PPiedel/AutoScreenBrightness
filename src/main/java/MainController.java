@@ -21,8 +21,8 @@ public class MainController {
     }
 
     //Inner class
-    public class InnerController{
-        public void startWorking() {
+    public class InnerController extends Thread{
+        public void run() {
             running = true;
             WebCamManager webCamManager = new WebCamManager();
             BrightnessManager brightnessManager = new BrightnessManager();
