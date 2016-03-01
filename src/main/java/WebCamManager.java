@@ -1,5 +1,6 @@
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
+import util.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

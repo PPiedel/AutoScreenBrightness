@@ -1,3 +1,7 @@
+package webcam;
+
+import webcam.BrightnessManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +27,6 @@ public class WindowsBrightnessManager extends BrightnessManager {
                 "$myMonitor.wmisetbrightness($delay, $brightness);";
 
         return power_shell_exe_command + brightness_settings_command;
-
     }
 
     private void reportAnyErrors(Process powerShellProcess) throws IOException, BrightnessSettingException {

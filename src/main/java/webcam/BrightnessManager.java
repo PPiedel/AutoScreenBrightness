@@ -1,3 +1,5 @@
+package webcam;
+
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.io.InputStreamReader;
 public abstract class BrightnessManager {
     private double brightnessFactor = 2.55;
 
-    public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException ;
+    public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException;
 
     public abstract String createExecCommand(int brightness, int delay) ;
 

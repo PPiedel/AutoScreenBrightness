@@ -1,3 +1,7 @@
+import webcam.BrightnessManager;
+import webcam.BrightnessSettingException;
+import webcam.WindowsBrightnessManager;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,7 +27,7 @@ public class MainController {
     public class InnerController implements Runnable{
         InnerController(){
             webCamManager = new WebCamManager();
-            brightnessManager = new BrightnessManager();
+            brightnessManager = new WindowsBrightnessManager();
         }
         private boolean running = false;
         public void run() {
