@@ -9,11 +9,7 @@ public class MainController {
     //Outer class
     private static final int BREAK_TIME = 2000;
     private static final int DELAY_TIME = 0;
-    private boolean running = false;
     private InnerController innerController;
-    public boolean isRunning() {
-        return running;
-    }
     private MainFrame mainFrame;
     private BrightnessManager brightnessManager;
     private BufferedImage image;
@@ -25,10 +21,12 @@ public class MainController {
 
     //Inner class
     public class InnerController implements Runnable{
-        public void run() {
-            running = true;
+        InnerController(){
             webCamManager = new WebCamManager();
-            brightnessManager = new BrightnessManager();
+            brightnessManager = new BrightnessManager();}
+        private boolean running = false;
+        public void run() {
+            running=true;
             while (running) {
                 image = webCamManager.getCameraImage();
                 int calculatedBrightness = brightnessManager.calculateLuminance(image);
@@ -45,9 +43,11 @@ public class MainController {
                 }
             }
         }
-
         public void stopWorking() {
             running = false;
+        }
+        public boolean isRunning(){
+            return running;
         }
     }
 

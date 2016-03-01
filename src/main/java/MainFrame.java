@@ -15,7 +15,7 @@ public class MainFrame {
     private JLabel actualBrightnessDesc;
     private JSlider factorSlider;
     private MainController.InnerController innerController;
-    private final ExecutorService exService = Executors.newSingleThreadExecutor();
+    private ExecutorService exService;
 
     public MainFrame(MainController.InnerController innerController) {
         this.innerController = innerController;
@@ -30,12 +30,17 @@ public class MainFrame {
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                exService.submit(innerController);
+                if (innerController.isRunning() == false){
+                exService =Executors.newSingleThreadExecutor();
+                exService.execute(innerController);
+                }
             }
+
         });
 
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                exService.shutdown();
                 innerController.stopWorking();
             }
         });
