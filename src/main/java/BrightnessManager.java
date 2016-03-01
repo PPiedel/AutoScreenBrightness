@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
  * Created by Pawel on 2016-02-26.
  */
 public class BrightnessManager {
+    private double brightnessFactor = 2.55;
 
     public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
         String command = createExecCommand(brightness, delay);
@@ -49,9 +50,12 @@ public class BrightnessManager {
             }
         }
         //System.out.println("Sum : "+sumOfBrightness);
-        float percentBrightness = (float) ((sumOfBrightness / 2.55) / (image.getHeight() * image.getWidth()));
-        System.out.println("Luminance " + percentBrightness);
-        return (int) percentBrightness;
+        float percentBrightness = (float) ((sumOfBrightness / brightnessFactor) / (image.getHeight() * image.getWidth()));
+        if(percentBrightness >= 100) return 100;
+        else return (int) percentBrightness;
     }
 
+    public void setBrightnessFactor(double brightnessFactor) {
+        this.brightnessFactor = brightnessFactor;
+    }
 }
