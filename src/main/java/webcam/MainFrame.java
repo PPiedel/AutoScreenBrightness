@@ -14,11 +14,9 @@ import java.util.concurrent.Executors;
  * Created by Pawel on 2016-02-28.
  */
 public class MainFrame {
-    JMenuBar menuBar;
-    JMenu optionsMenu;
-    JMenuItem settingsItem;
-    JRadioButtonMenuItem rbMenuItem;
-    JCheckBoxMenuItem cbMenuItem;
+    private JMenuBar menuBar;
+    private JMenu optionsMenu;
+    private JMenuItem settingsItem;
 
     private JButton startButton;
     private JButton stopButton;
@@ -41,13 +39,16 @@ public class MainFrame {
         frame.setVisible(true);
 
         createOptionsMenuComponents();
-
         frame.setJMenuBar(menuBar);
 
+        addActionListeners();
+    }
+
+    private void addActionListeners() {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (innerController.isRunning() == false){
-                exService =Executors.newSingleThreadExecutor();
+                if (!innerController.isRunning()){
+                exService = Executors.newSingleThreadExecutor();
                 exService.execute(innerController);
                 }
             }
@@ -64,6 +65,12 @@ public class MainFrame {
         factorSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 innerController.setBrightnessFactor(factorSlider.getValue());
+            }
+        });
+
+        settingsItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createSettingFrame();
             }
         });
     }
@@ -91,5 +98,9 @@ public class MainFrame {
 
         menuBar.add(optionsMenu);
 
+    }
+
+    protected void createSettingFrame() {
+        SettingsFrame frame = new SettingsFrame();
     }
 }
