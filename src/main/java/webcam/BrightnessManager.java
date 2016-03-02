@@ -13,7 +13,7 @@ public abstract class BrightnessManager {
 
     public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException;
 
-    public abstract String createExecCommand(int brightness, int delay) ;
+    public abstract String createExecCommand(int brightness, int delay) throws IOException;
 
     public int calculateLuminance(BufferedImage image) {
         float sumOfBrightness = 0;

@@ -19,7 +19,8 @@ public class MainController {
     private BufferedImage image;
     private WebCamManager webCamManager;
 
-    MainController(){
+    MainController(BrightnessManager brightnessManager){
+        this.brightnessManager = brightnessManager;
         innerController = new InnerController();
     }
 
@@ -27,7 +28,6 @@ public class MainController {
     public class InnerController implements Runnable{
         InnerController(){
             webCamManager = new WebCamManager();
-            brightnessManager = new WindowsBrightnessManager();
         }
         private boolean running = false;
         public void run() {
