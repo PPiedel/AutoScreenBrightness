@@ -1,6 +1,6 @@
 package webcam;
 
-import webcam.MainController;
+import com.sun.glass.events.KeyEvent;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -14,6 +14,12 @@ import java.util.concurrent.Executors;
  * Created by Pawel on 2016-02-28.
  */
 public class MainFrame {
+    JMenuBar menuBar;
+    JMenu optionsMenu;
+    JMenuItem breakTimeItem, delayItem;
+    JRadioButtonMenuItem rbMenuItem;
+    JCheckBoxMenuItem cbMenuItem;
+
     private JButton startButton;
     private JButton stopButton;
     private JLabel actualBrightnessLabel;
@@ -33,6 +39,10 @@ public class MainFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        createOptionsMenuComponents();
+
+        frame.setJMenuBar(menuBar);
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -63,4 +73,30 @@ public class MainFrame {
     }
 
 
+    private void createOptionsMenuComponents() {
+        menuBar = new JMenuBar();
+
+        optionsMenu = new JMenu("Options");
+        optionsMenu.setMnemonic(KeyEvent.VK_A);
+        optionsMenu.getAccessibleContext().setAccessibleDescription(
+                "Options");
+
+        breakTimeItem = new JMenuItem("Time interval",
+                KeyEvent.VK_T);
+        breakTimeItem.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        breakTimeItem.getAccessibleContext().setAccessibleDescription(
+                "Set time breaks before image sampling.");
+        optionsMenu.add(breakTimeItem);
+
+        delayItem = new JMenuItem("Delay",KeyEvent.VK_T);
+        breakTimeItem.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        breakTimeItem.getAccessibleContext().setAccessibleDescription(
+                "set the time, which will elapse before new brightness setting.");
+        optionsMenu.add(delayItem);
+
+        menuBar.add(optionsMenu);
+
+    }
 }

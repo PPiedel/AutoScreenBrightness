@@ -1,9 +1,7 @@
 package webcam;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Created by Pawel on 2016-02-26.

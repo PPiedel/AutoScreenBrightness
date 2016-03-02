@@ -1,6 +1,7 @@
 import org.apache.commons.lang3.SystemUtils;
 import webcam.BrightnessManager;
 import webcam.LinuxBrightnessManager;
+import webcam.MainController;
 import webcam.WindowsBrightnessManager;
 
 import javax.swing.*;

@@ -14,7 +14,7 @@ public class MainController {
     private BufferedImage image;
     private WebCamManager webCamManager;
 
-    MainController(BrightnessManager brightnessManager){
+    public MainController(BrightnessManager brightnessManager){
         this.brightnessManager = brightnessManager;
         innerController = new InnerController();
     }
