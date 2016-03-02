@@ -49,6 +49,6 @@ public class LinuxBrightnessManager extends BrightnessManager {
                 InputStreamReader(process.getInputStream()));
         String maxBrightness = stdInput.readLine();
        return new String("echo "+new Integer(maxBrightness)*(brightness/100)+
-               " | sudo tee /sys/class/backlight/intel_backlight/brightness");
+               " | sudo tee "+cardString+"brightness");
     }
 }
