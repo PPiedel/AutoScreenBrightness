@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class MainFrame {
     JMenuBar menuBar;
     JMenu optionsMenu;
-    JMenuItem breakTimeItem, delayItem;
+    JMenuItem settingsItem;
     JRadioButtonMenuItem rbMenuItem;
     JCheckBoxMenuItem cbMenuItem;
 
@@ -81,20 +81,13 @@ public class MainFrame {
         optionsMenu.getAccessibleContext().setAccessibleDescription(
                 "Options");
 
-        breakTimeItem = new JMenuItem("Time interval",
+        settingsItem = new JMenuItem("Settings",
                 KeyEvent.VK_T);
-        breakTimeItem.setAccelerator(KeyStroke.getKeyStroke(
+        settingsItem.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_1, ActionEvent.ALT_MASK));
-        breakTimeItem.getAccessibleContext().setAccessibleDescription(
-                "Set time breaks before image sampling.");
-        optionsMenu.add(breakTimeItem);
-
-        delayItem = new JMenuItem("Delay",KeyEvent.VK_T);
-        breakTimeItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_1, ActionEvent.ALT_MASK));
-        breakTimeItem.getAccessibleContext().setAccessibleDescription(
-                "set the time, which will elapse before new brightness setting.");
-        optionsMenu.add(delayItem);
+        settingsItem.getAccessibleContext().setAccessibleDescription(
+                "Settings");
+        optionsMenu.add(settingsItem);
 
         menuBar.add(optionsMenu);
 
