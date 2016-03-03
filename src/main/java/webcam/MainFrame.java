@@ -1,12 +1,11 @@
 package webcam;
 
-import com.sun.glass.events.KeyEvent;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -94,6 +93,12 @@ public class MainFrame {
                 KeyEvent.VK_1, ActionEvent.ALT_MASK));
         settingsItem.getAccessibleContext().setAccessibleDescription(
                 "Settings");
+        settingsItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                new SettingsFrame().main();
+            }
+        });
+
         optionsMenu.add(settingsItem);
 
         menuBar.add(optionsMenu);
