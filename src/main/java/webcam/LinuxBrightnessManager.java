@@ -28,10 +28,14 @@ public class LinuxBrightnessManager extends BrightnessManager {
         Process checkDir;
         BufferedReader stdInput;
         String cardString;
-        checkDir = Runtime.getRuntime().exec("if test -d /sys/class/backlight/intel_backlight; then echo \"intel\";" +
-                "else if test -d /sys/class/backlight/acpi_video0; then echo \"acpi\" ;fi ");
+
+        String[] command = {"sh","-c","test -d /sys/class/backlight/intel_backlight && echo \"intel\" || (test -d /sys/class/backlight/acpi_video0 && echo \"acpi\")"};
+        
+        checkDir = Runtime.getRuntime().exec(command);
+        checkDir.waitFor();
         stdInput = new BufferedReader(new
                 InputStreamReader(checkDir.getInputStream()));
+        System.out.println("####    "+stdInput.readLine());
         Card card = Card.valueOf(stdInput.readLine());
         switch (card){
             case intel:
