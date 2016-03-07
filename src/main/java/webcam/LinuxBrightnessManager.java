@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
  */
 public class LinuxBrightnessManager extends BrightnessManager {
     @Override
-    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
+    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException, InterruptedException {
 		String command = createExecCommand(brightness, delay);
 		Process bashProcess = Runtime.getRuntime().exec(command);
         bashProcess.getOutputStream().close();
@@ -23,7 +23,7 @@ public class LinuxBrightnessManager extends BrightnessManager {
     }
 
     @Override
-    public String createExecCommand (int brightness, int delay) throws IOException{
+    public String createExecCommand (int brightness, int delay) throws IOException, InterruptedException {
 
         Process checkDir;
         BufferedReader stdInput;

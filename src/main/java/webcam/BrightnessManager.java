@@ -9,9 +9,9 @@ import java.io.IOException;
 public abstract class BrightnessManager {
     private double brightnessFactor = 2.55;
 
-    public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException;
+    public abstract void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException, InterruptedException;
 
-    public abstract String createExecCommand(int brightness, int delay) throws IOException;
+    public abstract String createExecCommand(int brightness, int delay) throws IOException, InterruptedException;
 
     public int calculateLuminance(BufferedImage image) {
         float sumOfBrightness = 0;

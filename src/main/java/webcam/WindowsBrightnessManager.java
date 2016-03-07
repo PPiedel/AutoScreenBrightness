@@ -11,9 +11,10 @@ import java.io.InputStreamReader;
  */
 public class WindowsBrightnessManager extends BrightnessManager {
     @Override
-    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
+    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException, InterruptedException {
         String command = createExecCommand(brightness, delay);
         Process powerShellProcess = Runtime.getRuntime().exec(command);
+        powerShellProcess.waitFor();
         powerShellProcess.getOutputStream().close();
 
         reportAnyErrors(powerShellProcess);
