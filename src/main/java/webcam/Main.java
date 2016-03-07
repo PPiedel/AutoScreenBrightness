@@ -1,10 +1,5 @@
 package webcam;
 import org.apache.commons.lang3.SystemUtils;
-import webcam.BrightnessManager;
-import webcam.LinuxBrightnessManager;
-import webcam.MainController;
-import webcam.WindowsBrightnessManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,7 +34,7 @@ public class Main {
                 }
             });
             menu.add(closeItem);
-            final TrayIcon icon = new TrayIcon(image, "SystemTray Demo", menu);
+            final TrayIcon icon = new TrayIcon(image, "AutoBrightness", menu);
             icon.setImageAutoSize(true);
 
             try {
