@@ -13,6 +13,7 @@ public class SettingsFrame  {
     private JPanel settPanel;
     static final int xPosition = 30, yPosition = 30;
 
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
@@ -20,8 +21,9 @@ public class SettingsFrame  {
     public static void main() {
         JFrame frame = new JFrame("SettingsFrame");
         frame.setContentPane(new SettingsFrame().settPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 }

@@ -36,6 +36,7 @@ public class MainFrame {
         frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
         createOptionsMenuComponents();
         frame.setJMenuBar(menuBar);
