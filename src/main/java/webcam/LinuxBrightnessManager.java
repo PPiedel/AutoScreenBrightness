@@ -13,8 +13,9 @@ import java.io.InputStreamReader;
 public class LinuxBrightnessManager extends BrightnessManager {
     @Override
     public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException, InterruptedException {
-		String command = createExecCommand(brightness, delay);
+		String[] command = {"sh","-c",createExecCommand(brightness, delay)};
 		Process bashProcess = Runtime.getRuntime().exec(command);
+        bashProcess.waitFor();
         bashProcess.getOutputStream().close();
     }
 
@@ -35,7 +36,6 @@ public class LinuxBrightnessManager extends BrightnessManager {
         checkDir.waitFor();
         stdInput = new BufferedReader(new
                 InputStreamReader(checkDir.getInputStream()));
-        System.out.println("####    "+stdInput.readLine());
         Card card = Card.valueOf(stdInput.readLine());
         switch (card){
             case intel:
@@ -52,7 +52,7 @@ public class LinuxBrightnessManager extends BrightnessManager {
         stdInput = new BufferedReader(new
                 InputStreamReader(process.getInputStream()));
         String maxBrightness = stdInput.readLine();
-       return new String("echo "+new Integer(maxBrightness)*(brightness/100)+
-               " | sudo tee "+cardString+"brightness");
+        Double vauleToSet = (new Double(maxBrightness))*((double)brightness/100);
+       return new String("echo "+Math.round(vauleToSet)+" | sudo tee "+cardString+"brightness");
     }
 }
