@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
+
     public static void main(String[] args) {
         /** Nimbus look **/
         try {
@@ -26,10 +27,9 @@ public class Main {
 
         /** Tray icon **/
         if (SystemTray.isSupported()) {
+            final Toolkit toolkit = Toolkit.getDefaultToolkit();
             final SystemTray tray = SystemTray.getSystemTray();
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
             Image image = toolkit.getImage("src/resources/sun.png");
-
             PopupMenu menu = new PopupMenu();
 
             MenuItem closeItem = new MenuItem("Close");

@@ -33,6 +33,8 @@ public class MainFrame {
     public void start() {
         JFrame frame = new JFrame("MainFrame");
         frame.setContentPane(mainPanel);
+        ImageIcon img = new ImageIcon("src/resources/sun.png");
+        frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
