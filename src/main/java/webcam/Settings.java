@@ -38,18 +38,7 @@ public class Settings {
         this.delay = delay;
     }
 
-    public boolean saveSettings(Settings settings){
-        boolean saved = false;
-        try {
-            FileUtils.writeStringToFile(new File("test.txt"), breakTime +"\n"+delay);
-            saved=true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return saved;
-    }
-
-    public boolean readSettings(File file){
+    public boolean setSettingsFromFile(File file){
         boolean areRead = false;
         List<String> settings = new ArrayList<>();
         try {
@@ -59,9 +48,25 @@ public class Settings {
             e.printStackTrace();
         }
 
-        setBreakTime(Integer.parseInt(settings.get(0)));
-        setDelay(Integer.parseInt(settings.get(1)));
+        if (areRead){
+            breakTime = Integer.parseInt(settings.get(0));
+            delay = Integer.parseInt(settings.get(1));
+        }
 
         return areRead;
     }
+
+    public static boolean saveSettings(int breakTime, int delay){
+        boolean saved = false;
+        try {
+            /*function writeStringToFile overwrites previus values*/
+            FileUtils.writeStringToFile(new File("settings.txt"), breakTime +"\n"+delay);
+            saved=true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return saved;
+    }
+
+
 }

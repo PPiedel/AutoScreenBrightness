@@ -8,12 +8,16 @@ import java.awt.event.ActionListener;
  * Created by Pawel on 2016-03-02.
  */
 public class SettingsFrame  {
-    private JFormattedTextField brightnessTextField;
-    private JFormattedTextField delayTextField;
+    private JFormattedTextField breakTimeField;
+    private JFormattedTextField delayField;
     private JLabel delayLabel;
     private JLabel breakTimeLabel;
     private JPanel settPanel;
     private JButton okButton;
+
+    public SettingsFrame() {
+        addActionListeners();
+    }
 
     public static void createUIComponents() {
         JFrame frame = new JFrame("SettingsFrame");
@@ -28,12 +32,11 @@ public class SettingsFrame  {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int brightness = Integer.parseInt(brightnessTextField.getText());
-                System.out.println(brightness);
-                int delay = Integer.parseInt(delayTextField.getText());
+                int breakTime = Integer.parseInt(breakTimeField.getText());
+                System.out.println(breakTime);
+                int delay = Integer.parseInt(delayField.getText());
                 System.out.println(delay);
-
-
+                Settings.saveSettings(breakTime,delay);
             }
         });
 
