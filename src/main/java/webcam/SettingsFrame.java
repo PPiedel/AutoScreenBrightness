@@ -14,13 +14,13 @@ public class SettingsFrame  {
     private JLabel breakTimeLabel;
     private JPanel settPanel;
     private JButton okButton;
+    private static JFrame frame = new JFrame("SettingsFrame");
 
     public SettingsFrame() {
         addActionListeners();
     }
 
     public static void createUIComponents() {
-        JFrame frame = new JFrame("SettingsFrame");
         frame.setContentPane(new SettingsFrame().settPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
@@ -37,6 +37,7 @@ public class SettingsFrame  {
                 int delay = Integer.parseInt(delayField.getText());
                 System.out.println(delay);
                 Settings.saveSettings(breakTime,delay);
+                frame.dispose();
             }
         });
 
