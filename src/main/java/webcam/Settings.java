@@ -11,34 +11,27 @@ import java.util.List;
  * Created by Pawel on 2016-03-09.
  */
 public class Settings {
-    private final int DEFAULT_BREAK_TIME = 2000;
-    private final int DEFAULT_DELAY = 0;
 
-    private int breakTime;
-    private int delay;
+    private static int breakTime = 2000;
+    private static int delay =  0;
 
-    public Settings() {
-        this.breakTime = DEFAULT_BREAK_TIME;
-        this.delay = DEFAULT_DELAY;
-    }
-
-    public int getBreakTime() {
+    public static int getBreakTime() {
         return breakTime;
     }
 
-    public void setBreakTime(int breakTime) {
-        this.breakTime = breakTime;
+    public static void setBreakTime(int time) {
+        breakTime = time;
     }
 
-    public int getDelay() {
+    public static int getDelay() {
         return delay;
     }
 
-    public void setDelay(int delay) {
-        this.delay = delay;
+    public static void setDelay(int delayTime) {
+        delay=delayTime;
     }
 
-    public boolean setSettingsFromFile(File file){
+    public static boolean setSettingsFromFile(File file){
         boolean areRead = false;
         List<String> settings = new ArrayList<>();
         try {
