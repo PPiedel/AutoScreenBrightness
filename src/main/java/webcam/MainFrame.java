@@ -78,7 +78,6 @@ public class MainFrame {
         actualBrightnessLabel.setText(value);
     }
 
-
     private void createOptionsMenuComponents() {
         menuBar = new JMenuBar();
 
@@ -95,7 +94,7 @@ public class MainFrame {
                 "Settings");
         settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                new SettingsFrame().main();
+                new SettingsFrame().createUIComponents();
             }
         });
 
