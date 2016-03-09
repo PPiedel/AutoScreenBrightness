@@ -18,8 +18,9 @@ public class SettingsFrame  {
     public static void createUIComponents() {
         JFrame frame = new JFrame("SettingsFrame");
         frame.setContentPane(new SettingsFrame().settPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 

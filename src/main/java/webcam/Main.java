@@ -1,8 +1,12 @@
 package webcam;
 import org.apache.commons.lang3.SystemUtils;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Main {
+
     public static void main(String[] args) {
         /** Nimbus look **/
         try {
@@ -14,6 +18,30 @@ public class Main {
             }
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+
+        /** Tray icon **/
+        if (SystemTray.isSupported()) {
+            final Toolkit toolkit = Toolkit.getDefaultToolkit();
+            final SystemTray tray = SystemTray.getSystemTray();
+            Image image = toolkit.getImage("src/resources/sun.png");
+            PopupMenu menu = new PopupMenu();
+
+            MenuItem closeItem = new MenuItem("Close");
+            closeItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            menu.add(closeItem);
+            final TrayIcon icon = new TrayIcon(image, "AutoBrightness", menu);
+            icon.setImageAutoSize(true);
+
+            try {
+                tray.add(icon);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
         }
 
         MainController mainController= null;

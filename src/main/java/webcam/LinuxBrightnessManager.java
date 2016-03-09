@@ -12,9 +12,10 @@ import java.io.InputStreamReader;
  */
 public class LinuxBrightnessManager extends BrightnessManager {
     @Override
-    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException {
-		String command = createExecCommand(brightness, delay);
+    public void setBrightness(int brightness, int delay) throws IOException, BrightnessSettingException, InterruptedException {
+		String[] command = {"sh","-c",createExecCommand(brightness, delay)};
 		Process bashProcess = Runtime.getRuntime().exec(command);
+        bashProcess.waitFor();
         bashProcess.getOutputStream().close();
     }
 
@@ -23,13 +24,16 @@ public class LinuxBrightnessManager extends BrightnessManager {
     }
 
     @Override
-    public String createExecCommand (int brightness, int delay) throws IOException{
+    public String createExecCommand (int brightness, int delay) throws IOException, InterruptedException {
 
         Process checkDir;
         BufferedReader stdInput;
         String cardString;
-        checkDir = Runtime.getRuntime().exec("if test -d /sys/class/backlight/intel_backlight; then echo \"intel\";" +
-                "else if test -d /sys/class/backlight/acpi_video0; then echo \"acpi\" ;fi ");
+
+        String[] command = {"sh","-c","test -d /sys/class/backlight/intel_backlight && echo \"intel\" || (test -d /sys/class/backlight/acpi_video0 && echo \"acpi\")"};
+        
+        checkDir = Runtime.getRuntime().exec(command);
+        checkDir.waitFor();
         stdInput = new BufferedReader(new
                 InputStreamReader(checkDir.getInputStream()));
         Card card = Card.valueOf(stdInput.readLine());
@@ -48,7 +52,7 @@ public class LinuxBrightnessManager extends BrightnessManager {
         stdInput = new BufferedReader(new
                 InputStreamReader(process.getInputStream()));
         String maxBrightness = stdInput.readLine();
-       return new String("echo "+new Integer(maxBrightness)*(brightness/100)+
-               " | sudo tee "+cardString+"brightness");
+        Double vauleToSet = (new Double(maxBrightness))*((double)brightness/100);
+       return new String("echo "+Math.round(vauleToSet)+" | sudo tee "+cardString+"brightness");
     }
 }

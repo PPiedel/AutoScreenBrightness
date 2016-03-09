@@ -3,9 +3,8 @@ package webcam;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,14 +30,26 @@ public class MainFrame {
     }
 
     public void start() {
-        JFrame frame = new JFrame("MainFrame");
+        JFrame frame = new JFrame("AutoBrightness");
         frame.setContentPane(mainPanel);
+        ImageIcon img = new ImageIcon("src/resources/sun.png");
+        frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
-
         createOptionsMenuComponents();
         frame.setJMenuBar(menuBar);
+
+        //Listener when minimize button clicked
+        /*frame.addWindowStateListener(new WindowStateListener() {
+            @Override
+            public void windowStateChanged(WindowEvent arg0) {
+                if (arg0.getNewState() == Frame.ICONIFIED) {
+                    // do stuff
+                }
+            }
+        });*/
 
         addActionListeners();
     }
