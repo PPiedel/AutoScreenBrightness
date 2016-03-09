@@ -32,7 +32,7 @@ public class SettingsFrame  {
                 System.out.println(brightness);
                 int delay = Integer.parseInt(delayTextField.getText());
                 System.out.println(delay);
-                util.Utilities.saveSettings(brightness,delay);
+
 
             }
         });

@@ -13,6 +13,7 @@ public class MainController {
     private BrightnessManager brightnessManager;
     private BufferedImage image;
     private WebCamManager webCamManager;
+    private Settings settings = new Settings();
 
     public MainController(BrightnessManager brightnessManager){
         this.brightnessManager = brightnessManager;
@@ -34,8 +35,8 @@ public class MainController {
                 int calculatedBrightness = brightnessManager.calculateLuminance(image);
                 mainFrame.setBrightnessLabel(Integer.toString(calculatedBrightness));
                 try {
-                    brightnessManager.setBrightness(calculatedBrightness, webCamManager.getDelayTime());
-                    Thread.sleep(webCamManager.getBreakTime());
+                    brightnessManager.setBrightness(calculatedBrightness, settings.getDelay());
+                    Thread.sleep(settings.getBreakTime());
                 } catch (BrightnessSettingException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
