@@ -34,11 +34,11 @@ public class MainFrame {
         ImageIcon img = new ImageIcon("src/resources/sun.png");
         frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createOptionsMenuComponents();
+        frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        createOptionsMenuComponents();
-        frame.setJMenuBar(menuBar);
 
         //Listener when minimize button clicked
         /*frame.addWindowStateListener(new WindowStateListener() {
